@@ -58,12 +58,12 @@ export default function Login() {
     const email = event.currentTarget.email.value;
     const password = event.currentTarget.password.value;
 
-    if(email !== "" && password !== ""){
-      axios.post('/login',{email,password}).then(res=>{
-        console.log(res);
-      })
+    // if(email !== "" && password !== ""){
+    //   axios.post('/login',{email,password}).then(res=>{
+    //     console.log(res);
+    //   })
 
-    }
+    // }
 
   }
   return (

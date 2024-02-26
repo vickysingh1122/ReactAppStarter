@@ -1,14 +1,11 @@
 import React from 'react';
 import { Card, CardContent, Container, Grid, Box, Avatar, Tab, Tabs, Typography, Checkbox, FormControlLabel, TextField, Link } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { FormControl, OutlinedInput, InputLabel, InputAdornment, IconButton, FormGroup } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import Button from '@mui/material/Button';
 import { Divider } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import axios from '../axiosconfig';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,9 +48,23 @@ export default function Register() {
   };
   const handleUserSubmit = (event) => {
     event.preventDefault();
-    console.log("dsdg======");
-    const data = new FormData(event.currentTarget);
-    console.log(data);
+    const fname = event.currentTarget.firstName.value;
+    const lname = event.currentTarget.lastName.value;
+    const email = event.currentTarget.email.value;
+    const password = event.currentTarget.password.value;
+     if(fname !=="" && lname !=="" && email !=="" && password !==""){
+      let values = {
+        "fname" : fname,
+        "lname" : lname,
+        "email" : email,
+        "password" : password
+      }
+      axios.post('/register',values).then(res=>{
+        console.log("record successfully");
+      }).catch((err)=>{
+        console.log(err);
+      }) 
+     }
   };
   const handleAdminSubmit = (event) => {
     event.preventDefault();
