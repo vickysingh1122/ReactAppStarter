@@ -62,7 +62,19 @@ export default function Register() {
       axios.post('/register',values).then(res=>{
         console.log("record successfully");
       }).catch((err)=>{
-        console.log(err);
+        // console.log(err);
+        if (err.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log("Server responded with an error status code:", err.response.status);
+          console.log("Error message from server:", err.response.data);
+        } else if (err.request) {
+          // The request was made but no response was received
+          console.log("No response received from the server");
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error during request setup:", err.message);
+        }
       }) 
      }
   };
