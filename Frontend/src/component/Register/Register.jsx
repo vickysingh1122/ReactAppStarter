@@ -52,16 +52,19 @@ export default function Register() {
     const lname = event.currentTarget.lastName.value;
     const email = event.currentTarget.email.value;
     const password = event.currentTarget.password.value;
-     if(fname !=="" && lname !=="" && email !=="" && password !==""){
+    if (fname !== "" && lname !== "" && email !== "" && password !== "") {
       let values = {
-        "fname" : fname,
-        "lname" : lname,
-        "email" : email,
-        "password" : password
+        "fname": fname,
+        "lname": lname,
+        "email": email,
+        "password": password
       }
-      axios.post('/register',values).then(res=>{
+      axios.post('/register', values).then(res => {
         console.log("record successfully");
-      }).catch((err)=>{
+        if (res.status === 200) {
+          alert(res.data);
+        }
+      }).catch((err) => {
         // console.log(err);
         if (err.response) {
           // The request was made and the server responded with a status code
@@ -75,8 +78,8 @@ export default function Register() {
           // Something happened in setting up the request that triggered an Error
           console.log("Error during request setup:", err.message);
         }
-      }) 
-     }
+      })
+    }
   };
   const handleAdminSubmit = (event) => {
     event.preventDefault();

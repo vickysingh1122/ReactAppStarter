@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Container, Grid, Box, Tab, Tabs, Typography,Avatar } from '@mui/material';
+import { Card, CardContent, Container, Grid, Box, Tab, Tabs, Typography, Avatar } from '@mui/material';
 import { FormControl, OutlinedInput, InputLabel, InputAdornment, IconButton, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
@@ -10,7 +10,6 @@ import { Divider } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import axios from '../axiosconfig';
-
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,7 +43,6 @@ export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -55,15 +53,35 @@ export default function Login() {
     console.log("gdfgdffd");
   }
   const handleClientSubmit = (event) => {
+    event.preventDefault();
     const email = event.currentTarget.email.value;
     const password = event.currentTarget.password.value;
 
-    // if(email !== "" && password !== ""){
-    //   axios.post('/login',{email,password}).then(res=>{
-    //     console.log(res);
-    //   })
-
-    // }
+    if (email !== "" && password !== "") {
+      let values = {
+        'email': email,
+        'password': password
+      }
+      axios.post('/login', values).then(res => {
+        if (res.status === 200) {
+          alert(res.data);
+        }
+      }).catch((err) => {
+        // console.log(err);
+        if (err.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log("Server responded with an error status code:", err.response.status);
+          console.log("Error message from server:", err.response.data);
+        } else if (err.request) {
+          // The request was made but no response was received
+          console.log("No response received from the server");
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error during request setup:", err.message);
+        }
+      })
+    }
 
   }
   return (
@@ -77,7 +95,7 @@ export default function Login() {
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                  Sign In 
+                  Sign In
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -151,7 +169,7 @@ export default function Login() {
                         <Divider>OR</Divider>
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Button  variant="outlined" startIcon={<GoogleIcon />} fullWidth>
+                        <Button variant="outlined" startIcon={<GoogleIcon />} fullWidth>
                           Login In The Google
                         </Button>
                       </Grid>
