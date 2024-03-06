@@ -6,12 +6,10 @@ import Header from '../Header/Header';
 
 function Overview() {
     return (
-        <Box sx={{ display: 'flex' }}>
-            <Paper>
-                <SidebarBox />
-            </Paper>
+        <Box sx={{ display: 'flex' }} className="maincss"  >
+             
             <Paper sx={{ width: '100%' }}>
-                <Header />
+                
                 <Home />
             </Paper>
         </Box>

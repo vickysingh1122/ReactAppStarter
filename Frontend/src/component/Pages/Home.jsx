@@ -9,7 +9,7 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 function Home() {
     return (
         <React.Fragment>
-            <Container sx={{paddingBottom:"30px",paddingTop:"20px"}} >
+            <div sx={{paddingBottom:"30px",paddingTop:"20px"}} className='homecss' >
                 <Box component="section">
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={6} lg={4}>
@@ -76,7 +76,7 @@ function Home() {
                         </Grid>
                     </Grid>
                 </Box>
-            </Container>
+            </div>
         </React.Fragment>
     )
 }
